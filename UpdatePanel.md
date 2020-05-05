@@ -1,10 +1,5 @@
 # ASP.NET WebForm - UpdatePanel
 
-
-引用網址：https://github.com/AhmedMah/ClinicManagement
-
-![Dashboard]()
-
 # UpdatePanel結構
 
 ```C#
