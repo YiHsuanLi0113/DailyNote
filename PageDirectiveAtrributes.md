@@ -40,9 +40,9 @@ ASP.NET WebForm預設Code-Seperation開啟，將視覺的`.aspx`及邏輯的`.as
 
 # EnableViewState
 
-伺服器利用ViewState端儲存了網頁各個控制元件及頁面的狀態，_VIEWSTATE屬性其值為一長串字元，型別為hidden，用以記錄各個控制元件和頁面的狀態。當使用者對頁面進行相關操作，狀態值發生改變，並將改變的值傳遞給Server端。
-一旦頁面的控制元件很多，這種頻繁的傳遞控制元件狀態值對網路對消耗很大，因此ASP.NET提供EnableViewState屬性，預設值為true。當設定為true，在傳遞狀態值時就包含該控制元件；反之。既然狀態值不包含該控制元件，則Client端對它進行的操作，Server端是不響應的。
-好處是某些控制元件不需要接受使用者操作或只需要接受一次操作時，可以將這些控制元件的EnableViewState設為false，以優化程式，提高網路訪問速度。
+伺服器利用ViewState端儲存了網頁各個控制元件及頁面的狀態，`_VIEWSTATE`屬性其值為一長串字元，型別為`hidden`，用以記錄各個控制元件和頁面的狀態。當使用者對頁面進行相關操作，狀態值發生改變，並將改變的值傳遞給Server端。
+一旦頁面的控制元件很多，這種頻繁的傳遞控制元件狀態值對網路對消耗很大，因此ASP.NET提供`EnableViewState`屬性，預設值為`true`。當設定為true，在傳遞狀態值時就包含該控制元件；反之。既然狀態值不包含該控制元件，則Client端對它進行的操作，Server端是不響應的。
+好處是某些控制元件不需要接受使用者操作或只需要接受一次操作時，可以將這些控制元件的`EnableViewState`設為`false`，以優化程式，提高網路訪問速度。
 
 # MasterPageFile
 
