@@ -82,3 +82,35 @@ XXX
 XXX
 
 # Trace
+
+通常要監測ASP.NET網頁的執行狀況與效能會使用`Trace`，大致上追蹤分兩種層級，一種為「網頁層級的追蹤」，另一種為「應用程式層級的追蹤」
+1. 網頁層級的追蹤：針對單一網頁追蹤
+   
+   ```C#
+   <%@ Page Trace="true" %>
+   ```
+   
+   - 執行起來會出現該頁面中執行時期完整的詳細資訊，包括HTTP Request的詳細資訊、追蹤資訊(Page類別中預設事件的執行時間)、整個網頁的控制項樹狀結構、所有的Session、Cookie、HTTP Hearder、Form集合、QueryString集合、伺服器變數...等。對於開發除錯相當有用。
+   - 在Code Behind事件程式中，可使用`Trace.Write`或`Trace.Warn`來設定輸出追蹤的時間點與備註說明
+   ```C#
+   Trace.Write("");
+   Trace.Warn(""); //輸出文字為紅色
+   
+   //用於.NET元件開發
+   HttpContext.Current.Trace.Write("");
+   HttpContext.Current.Trace.Warn("");
+   ```
+   
+2. 應用程式層級的追蹤：在整個網站下進行追蹤
+
+   - `Web.config`
+  ```C#
+  <system.web>
+    <trace enabled="true" pageOutput="true" requestLimit="100" traceMode="SortByTime" localOnly="true" />
+  </system.web>
+  ```
+  
+  - 執行後原本的頁面都不會變，但每頁在執行時會將追蹤資訊寫入到記憶體中，開發者可以進入該網站或該虛擬目錄下的`trace.axd`頁面就可以看到所有追蹤的資訊
+  - 這項功能對於正式主機的效能監測十分便利
+
+- 除使用`Trace`，追蹤網頁執行效能亦可使用Log Parser工具直接從IIS產生的Log檔進行分析
