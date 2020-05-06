@@ -103,14 +103,14 @@ XXX
    
 2. 應用程式層級的追蹤：在整個網站下進行追蹤
 
-   - `Web.config`
+- `Web.config`
   ```C#
   <system.web>
     <trace enabled="true" pageOutput="true" requestLimit="100" traceMode="SortByTime" localOnly="true" />
   </system.web>
   ```
   
-  - 執行後原本的頁面都不會變，但每頁在執行時會將追蹤資訊寫入到記憶體中，開發者可以進入該網站或該虛擬目錄下的`trace.axd`頁面就可以看到所有追蹤的資訊
-  - 這項功能對於正式主機的效能監測十分便利
+    - 執行後原本的頁面都不會變，但每頁在執行時會將追蹤資訊寫入到記憶體中，開發者可以進入該網站或該虛擬目錄下的`trace.axd`頁面就可以看到所有追蹤的資訊
+    - 這項功能對於正式主機的效能監測十分便利
 
 - 除使用`Trace`，追蹤網頁執行效能亦可使用Log Parser工具直接從IIS產生的Log檔進行分析
