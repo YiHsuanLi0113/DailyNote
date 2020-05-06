@@ -50,7 +50,28 @@ ASP.NET WebForm預設Code-Seperation開啟，將視覺的`.aspx`及邏輯的`.as
 
 # MaintainScrollPositionOnPostback
 
-XXX
+postback後仍維持在同一位置。有三種設定方式，如下：
+
+1. 於Web.config設定
+
+```C#
+<system.web>
+  <pages maintainScrollPositionOnPostBack="true">
+  </pages>
+</system.web>
+```
+
+2. 於.aspx設定
+
+```C#
+<@page MaintainScrollPositionOnPostBack="true">
+```
+
+3. 於.cs設定
+
+```C#
+Page.MaintainScrollPositionOnPostBack = true;
+```
 
 # ValidateRequest
 
