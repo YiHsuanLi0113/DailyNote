@@ -75,11 +75,11 @@ Page.MaintainScrollPositionOnPostBack = true;
 
 # ValidateRequest
 
-XXX
+網頁自動進行安全性檢查，主要是防止惡意程式，若使用者輸入了危險字串(EX.指令碼)，ASP.NET會自動產生安全性錯誤訊息。若要關閉可將`ValidateRequest`設為`false`
 
-# HttpRequestValidationException
-
-XXX
+```C#
+<%@ Page ValidateRequest="false" %>
+```
 
 # Trace
 
