@@ -46,7 +46,7 @@ ASP.NET WebForm預設Code-Seperation開啟，將視覺的`.aspx`及邏輯的`.as
 
 # MasterPageFile
 
-XXX
+設定內容頁面或巢狀主版頁面`MasterPage`之主版頁面路徑。支援相對和絕對路徑
 
 # MaintainScrollPositionOnPostback
 
