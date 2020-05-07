@@ -88,3 +88,7 @@ public partial class _Default : Page
   delegate void WriteSomething(int number);
 }
 ```
+
+輸出結果
+
+![Dashboard](https://github.com/YiHsuanLi0113/DailyNote/blob/master/Images/delegate.JPG)
