@@ -80,3 +80,27 @@
 3. `Session`於伺服器端不會自動失效，除非已超過設置的失效時間
 4. `Session`機制會在一個用戶完成身分認證後，存下所需的用戶資料，, 接著產生一組對應的ID，存入`Cookie`後傳回Client端
 5. 多應用於網站計數器、登入驗證、使用者上次到訪日期
+
+- Session Store
+1. 內存 : Memory Store，有Memory Leak的風險。適合用於開發環境
+2. Cookie : 配合Signed Cookie，但這個方法會讓Request傳輸量變大
+   
+   假設現在的Cookie資料為
+   ```C#
+   { _dotcom_user: 'jcc'}
+   ```
+   搭配一段秘密字串`this_is_the_secret_hash`來做SHA1
+   ```C#
+   var r = SHA1('this_is_the_secret_hash' + 'jcc');
+   ```
+   最後回傳至Client端的Cookie為
+   ```C#
+   {
+    dotcom_user: 'jcc',
+    'dotcom_user.sig': 'd01a3d595af33625be4159de07a20b79a1540e54'
+   }
+   ```
+   這時候Client端異動了Cookie資料，但因為不知道秘密字串為何，故無法產生正確的hash值。如此一來就避免了被竄改Cookie的可能
+3. 緩存 : 常見的有redis、memcache
+4. 資料庫 : 不適用
+
