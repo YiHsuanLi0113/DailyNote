@@ -1,8 +1,15 @@
 # RegisterClientScriptBlock
 
+將JavaScript註冊到Client端的`<form>`之下
+
 # RegisterStartupScript
 
+將JavaScript註冊到Client端的`</form>`之上
+
 # Response.Write
+
+註冊於`<html>`之上
+ - 不建議使用，會使WebForm的CSS失去作用，有UpdatePanel時會有js error
 
 
 ```C#
@@ -19,3 +26,5 @@ protected void Page_Load(object sender, EventArgs e)
 1. Response.Write OK
 2. RegisterClientScriptBlock OK
 3. RegisterStartupScript OK
+
+![Dashboard](https://github.com/YiHsuanLi0113/DailyNote/blob/master/Images/registerscript.JPG)
