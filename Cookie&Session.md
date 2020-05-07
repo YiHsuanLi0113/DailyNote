@@ -36,6 +36,42 @@
   - `Expires`及`maxAge` : 告訴瀏覽器Cookie何時過期。expires為UTC格式時間，maxAge為Cookie多久後過期的相對時間。若無設定這兩個參數，會產生Session Cookie，Session Cookie為短暫的，當用戶關閉瀏覽器就會被清除，一般用來保存Session ID 
   - `Secure` : 當`Secure`為`true`，Cookie在HTTP無效，在HTTPS中才有效
   - `HttpOnly` : 瀏覽器不允許腳本操作`document.cookie`去更改Cookie。一般狀況下都應設置為`true`以避免被XSS攻擊取得Cookie
+  
+- 利用ASP.NET來操作Cookie
+  1. 新增Cookie，並設定值
+     ```C#
+     HttpCookie TheCookie = new HttpCookie("UserInfo"); //新增Cookie名稱為UserInfo
+     TheCookie.Value = "Ellen"; //設定Cookie值
+     Response.Cookies.Add(TheCookie);
+     ```
+  2. 取得從瀏覽器送過來的Cookie
+     ```C#
+     if (Request.Cookies["UserInfo"] != null)
+     {
+      var UserName = Request.Cookies["UserInfo"].Value;
+     }
+     ```
+  3. 更新Cookie的到期時間
+     ```C#
+     if (Request.Cookies["UserInfo"] != null)
+     {
+      Request.Cookies["UserInfo"].Expires = DateTime.Now.AddHours(1);
+     }
+     ```
+  4. 刪除瀏覽器的Cookie
+     ```C#
+     // 1. 將Cookie的到期時間設定為昨天即可移除
+     Request.Cookies["UserInfo"].Expires = DateTime.Now.AddDays(-1);
+     // 2. 利用Remove方法移除Cookie
+     Request.Cookies.Remove("UserInfo");
+     ```
+  5. 建立一個含有多個值的Cookie
+     ```C#
+     HttpCookie TheCookie = new HttpCookie("UserInfo");
+     TheCookie.Values["Name"] = "Ellen";
+     TheCookie.Values["Language"] = "zh-TW";
+     Response.Cookies.Add(TheCookie);
+     ```
 
 # Session
 
