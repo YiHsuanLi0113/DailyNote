@@ -10,6 +10,8 @@
   
   2. 非對稱金鑰
      - RSA
+     
+     ![Dashboard](https://github.com/YiHsuanLi0113/DailyNote/blob/master/Images/encryption.JPG)
 
 # Hash 雜湊值
 
