@@ -177,5 +177,21 @@ Session.Abandon(); //移除Session所有變數，且會觸發Session_End()事件
   ```
 
 
-  
+# ViewState
+
+1. ViewState提供一個字典物件，用於在對同一頁面的多個Request之間保留值
+2. 用來存放ASP.NET頁面上控制項的狀態值，給兩個連續的PostBack使用
+3. 要傳遞的變數會存放於hidden field，`name`及`id`皆為`_VIEWSTATE`
+   ```C#
+   <input type="hidden" name="_VIEWSTATE" id="_VIEWSTATE" value="ffptijjmle4g68er84435" />
+   ```
+4. 不需要Server資源，ViewState包含在頁面程式碼的結構中
+5. ViewState的值會經過雜湊、壓縮，再透過base-64編碼後才存入欄位中
+6. 僅能存在於同一頁面，無法跨頁
+7. 可存放可序列化Object
+8. 不適用存放大量資料，網頁載入速度會降低
+   ```C#
+   ViewState["User"] = "Ellen"; //賦值
+   string theValue = ViewState["User"].ToString(); //取值
+   ```
 
