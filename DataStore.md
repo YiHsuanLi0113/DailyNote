@@ -151,5 +151,31 @@ Session.Abandon(); //移除Session所有變數，且會觸發Session_End()事件
 3. Cache可自行設定時間，時間到期後消失，不受網頁關閉或關機影響
 4. 目的是為了減少對資料庫的存取
 5. 大多應用於靜態型網頁快取及入口型網站
+
+- Example
+  當有一入口網站，內容不會頻繁變動，但頁面上有許多資訊需要從資料庫抓取，每個使用者進入到此網頁就必須重新抓取並載入一次，如此非常消耗流量及資源。
+  
+  這時候若將輸出結果存到Cache中，並設定適當時效(EX.6小時)，當第一位使用者進到頁面時，被迫將結果載入並存放到Cache，接下來6小時內進入到此頁面的使用者都不需要重新載入。
+  
+  ```C#
+  //存放資訊
+  Cache["User"] = "Ellen"; 
+  Cache["User"] = "Shana"; 
+  System.Console.WirteLine(Cache["User"].ToString()); //顯示 Shana (遇到同名，第二次會覆蓋第一次)
+  
+  //存放資訊
+  Cache.Insert("User", "Ellen"); 
+  Cache.Insert("User", "Shana");
+  System.Console.WirteLine(Cache["User"].ToString()); //顯示 Shana (遇到同名，第二次會覆蓋第一次)
+  
+  //存放資訊
+  Cache.Add("User", "Ellen"); 
+  Cache.Add("User", "Shana"); 
+  System.Console.WirteLine(Cache["User"].ToString()); //顯示 Ellen (遇到同名，第二次會失敗)
+  
+  String UserInfo = Cache["User"].ToString(); //讀取資訊
+  ```
+
+
   
 
