@@ -11,11 +11,31 @@
   2. 瀏覽器將Cookie保存於電腦的資料夾中
   3. 每次請求，瀏覽器都會將符合的Cookie送至Server端
   
+  每次瀏覽器請求網頁時，會一併將Cookie的資訊傳送到Server端
+  ![Dashboard](https://github.com/YiHsuanLi0113/DailyNote/blob/master/Images/requestCookie.JPG)
+  
+  當Server端將網頁回傳給瀏覽器時，透過`Set-Cookie`這個Header來告訴Client端需要在瀏覽器中加入一或多個Cookie，並且記錄該Cookie的隸屬網域(Domain)、存放目錄(Path)、過期時間(Expires)等資訊
+  ![Dashboard](https://github.com/YiHsuanLi0113/DailyNote/blob/master/Images/responseCookie.JPG)
+  假設瀏覽器取得某網頁，且包含了5個CSS及2個JavaScript檔案，在這一次的Request中就會將相同的Cookie送出7次。
+  
+- Cookie限制
+  基於RFC2965規範，定義了瀏覽器對於Cookie的最低儲存量
+  1. 每個Cookie所能存放的大小為 4096 Bytes
+  2. 每個網域至少可以儲存20個Cookie，若儲存超過限制大小，瀏覽器會捨棄最舊的Cookie
+  3. 至少能儲存300個Cookie
+
 - Cookie可選參數
-  - `path` : 
-  - `expires`及`maxAge` : 告訴瀏覽器Cookie何時過期。expires為UTC格式時間，maxAge為Cookie多久後過期的相對時間。若無設定這兩個參數，會產生Session Cookie，Session Cookie為短暫的，當用戶關閉瀏覽器就會被清除，一般用來保存Session ID 
-  - `secure` : 當`Secure`為`true`，Cookie在HTTP無效，在HTTPS中才有效
-  - `httpOnly` : 瀏覽器不允許腳本操作`document.cookie`去更改Cookie。一般狀況下都應設置為`true`以避免被XSS攻擊取得Cookie
+  - `Path` : 限制該Cookie僅能由某個資料夾或應用程式存取
+  
+    Ex. 點部落網址為 www.dotblogs.com.tw ，若我們將`Path`設定為`/Web1`，則代表僅在 www.dotblogs.com.tw/Web1 這個網站底下的網頁才能使用該Cookie；若無設定則預設為`/`根目錄，代表該網域底下的所有網站都能取得該Cookie
+  - `Domain` : 限制Cookie的網域範圍
+  
+    PS. 一般SSO(Single Sign-On)機制也會利用設定網域的方式來讓不同子網域的網站也能存取到同一個Cookie，以達到跨網域登入
+    
+    PS. 不能設定和自己不同的網域，ex. www.dotblogs.com.tw 的網站在設定Cookie時不能指定 facebook.com的Cookie
+  - `Expires`及`maxAge` : 告訴瀏覽器Cookie何時過期。expires為UTC格式時間，maxAge為Cookie多久後過期的相對時間。若無設定這兩個參數，會產生Session Cookie，Session Cookie為短暫的，當用戶關閉瀏覽器就會被清除，一般用來保存Session ID 
+  - `Secure` : 當`Secure`為`true`，Cookie在HTTP無效，在HTTPS中才有效
+  - `HttpOnly` : 瀏覽器不允許腳本操作`document.cookie`去更改Cookie。一般狀況下都應設置為`true`以避免被XSS攻擊取得Cookie
 
 # Session
 
