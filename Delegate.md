@@ -1,5 +1,7 @@
 # Delegate
 
+1. 一般用法
+
 ```C#
 public partial class _Default : Page
 {
@@ -52,5 +54,37 @@ public partial class _Default : Page
   }
   
   delegate int arithmetic(int num1, int num2); //定義委派類型
+}
+```
+
+2. 組合用法
+```C#
+public partial class _Default : Page
+{
+  protected void Page_Load(object sender, EventArgs e)
+  {
+    WriteSomething something = new WriteSomething(PrintFunction);
+    something += SquareFunction;
+    something += RadicalFunction;
+    
+    something.Invoke(25);
+  }
+  
+  private void PrintFunction(int num)
+  {
+    System.Diagnostics.Debug.WriteLine($"PrintFunction:{num}");
+  }
+  
+  private void SquareFunction(int num)
+  {
+    System.Diagnostics.Debug.WriteLine($"PrintFunction:{Math.Pow(num, 2)}");
+  }
+  
+  private void RadicalFunction(int num)
+  {
+    System.Diagnostics.Debug.WriteLine($"RadicalFunction:{Math.Sqrt(num)}");
+  }
+  
+  delegate void WriteSomething(int number);
 }
 ```
