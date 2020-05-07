@@ -26,7 +26,8 @@ public partial class _Default : Page
         break;
     }
     
-    int answer = ari(6, 3); // 2
+    int answer = ari(6, 3); // 答案為2
+    int answer1 = ari.Invoke(6, 3); //答案為2，與ari(6, 3)相同
   }
   
   // 這些方法必須要和定義委派類型相同，此例中即必須return int，有兩個int參數
